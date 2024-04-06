@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+<div class="container mt-5" >
+    <form class="mb-4">
+    <div class="row">
+      <div class="col-md-6">
+        <input class="form-control" name="search" placeholder="Search">
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-success">Seacrh</button>
+      </div>
+    </div>
+  </form>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">sno.</th>
+            <th scope="col">student_id</th>
+            <th scope="col">student_name</th>
+            <th scope="col">student_age</th>
+            <th scope="col">student_email</th>
+            <th scope="col">department</th>
+            <th scope="col">student_address</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in queryset %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>
+              <a href="{% url 'see_marks' student.student_id %}">
+                {{student.student_id}}
+              </a>
+              </td>
+            <td>{{student.student_name}}</td>
+            <td>{{student.student_age}}</td>
+            <td>{{student.student_email}}</td>
+            <td>{{student.department.department}}</td>
+            <td>{{student.student_address}}</td>
+          </tr>
+
+            
+             {% endfor %}
+            </tbody>
+    </table>
+             <!-- <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav> -->
+             <div class="pagination">
+                <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    
+                    {% if queryset.has_previous %}
+                        
+                        <li class="page-item"><a class="page-link" class="page-link" href="?page={{ queryset.previous_page_number }}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" class="page-link" href="?page=1">&laquo; 1</a></li>
+                        <li class="page-item"><a class="page-link" class="page-link" href="?page=2">&laquo; 2</a></li>
+                        <li class="page-item"><a class="page-link" class="page-link" href="?page=3">&laquo; 3</a></li>
+
+                    {% endif %}
+            
+                    
+                    {% if queryset.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ queryset.next_page_number }}">next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ queryset.paginator.num_pages }}">Last &raquo;</a></li>
+                    {% endif %}
+                
+                </ul>
+                </nav>
+            </div>
+          </div>
+           
+
+
+
+    
+    
+    
+    
+    
+    
+        
+        
+        
+        
+        
+{% endblock %}
+
+

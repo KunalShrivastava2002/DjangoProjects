@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block start %}
+<body>
+    <h1> This is a django server</h1>
+
+    <a href="/contact/">contact</a>
+    |
+    <a href="/about/">about</a>
+
+
+    <table class="container">
+        <tr>
+          <th>S.no.</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>can vote</th>
+        </tr>
+        {% for people in peoples %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{people.name}}</td>
+          <td>{{people.age}}</td>
+          <td {%if people.age < 18 %} style="background: red;" {% endif %}>
+            {% if people.age >= 18 %}
+            👍
+            {% else %}
+            👎
+            {% endif %}
+
+            </td>
+        </tr>
+        {% endfor %}
+      
+      </table>
+
+      <p>{% if "mango" in vegetable %}
+        Available
+
+        {% else %}
+        not Available
+
+        {% endif %}
+       
+      </p>
+
+      {% endblock %}
+      
+
+
